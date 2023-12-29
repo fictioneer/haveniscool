@@ -4,28 +4,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>(taylor's version)</title>
-      <link rel="stylesheet" href="style.css">
-     <script type="text/javascript" src="index.js"></script> 
+    <title>(Taylor's Version) - Tags Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="index.js" defer></script>
+    <!-- Adding the 'defer' attribute ensures that the script is executed after the HTML is parsed -->
 </head>
 
 <body>
     <div id="middleIsland">
-        <h3>Taylor Swift Tags Generator</h3>
-        <div id="output"></div>
-        
+        <!-- Header Section -->
+        <header>
+            <h1>(Taylor's Version) - Tags Generator</h1>
+        </header>
+
+        <!-- Output Section -->
+        <section id="output">
+            <!-- The generated tags will be displayed here -->
+        </section>
+
         <hr>
-        <div class="slidecontainer">
+
+        <!-- Input Section -->
+        <section class="slidecontainer">
             <label for="name">Name:</label>
             <input name="name" type="text" id="name" placeholder="e.g., Haven">
-        </div>
-        <div class="slidecontainer">
-            <label for="range">Intensity</label>
-            <input name="range" id="range" type="range" min="1" max="100" value="50" class="slider">
-        </div>
-        <button id="redo">↺</button>
-    </div>
+        </section>
 
+        <section class="slidecontainer">
+            <label for="range">Intensity:</label>
+            <input name="range" id="range" type="range" min="1" max="100" value="50" class="slider">
+        </section>
+
+        <section>
+            <button id="redo">↺ Redo</button>
+        </section>
+    </div>
 </body>
 
 </html>
+
