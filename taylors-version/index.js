@@ -1,5 +1,5 @@
     document.addEventListener('DOMContentLoaded', function() {
-document.getElementById("name").addEventListener("input", function () {
+document.getElementById("username").addEventListener("input", function () {
             document.getElementById("output").innerText = submit();
         });
 
@@ -33,7 +33,7 @@ document.getElementById("name").addEventListener("input", function () {
             let normalCount = Math.round((normal.length / 100) * intensity);
             tags = tags.concat(getRandomFromArray(normal, normalCount));
 
-            let name = document.getElementById("name").value || "Haven";
+            let name = document.getElementById("username").value || "Haven";
             let total = name + " " + tags.join(" ");
             return total;
         }
