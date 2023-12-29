@@ -1,4 +1,5 @@
-   document.getElementById("name").addEventListener("input", function () {
+    document.addEventListener('DOMContentLoaded', function() {
+document.getElementById("name").addEventListener("input", function () {
             document.getElementById("output").innerText = submit();
         });
 
@@ -38,3 +39,4 @@
         }
 
         document.getElementById("output").innerText = submit();
+    });
