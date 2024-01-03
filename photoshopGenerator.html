@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landing on One Side</title>
+  <style>
+    .scene-container {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+.labels {
+    display: flex;
+      justify-content: space-around;
+      font-weight: 700;
+       font-size: 20px;
+}
+    .scene {
+      perspective: 400px; /* Adjusted perspective */
+      width: 120px; /* Smaller width */
+      height: 120px; /* Smaller height */
+      margin: 20px; /* Smaller margin */
+    }
+
+    .cube {
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+      transition: transform 3s ease-in-out;
+    }
+
+    .face {
+      position: absolute;
+      width: 120px; /* Smaller width */
+      height: 120px; /* Smaller height */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px; /* Smaller font size */
+      font-weight: bold;
+      background-color: #3498db;
+      border: 2px solid #2980b9;
+      backface-visibility: hidden; /* Ensure text is visible on all faces */
+    }
+
+    .face1 { transform: rotateY(0deg) translateZ(60px); }
+    .face2 { transform: rotateX(90deg) translateZ(60px); }
+    .face3 { transform: rotateY(90deg) translateZ(60px); }
+    .face4 { transform: rotateY(-90deg) translateZ(60px); }
+    .face5 { transform: rotateX(-90deg) translateZ(60px); }
+    .face6 { transform: rotateX(180deg) translateZ(60px); }
+</style>
+</head>
+<body>
+<div class="labels">
+    <label for="cube1" id="label1">Media:</label>
+    <label for="cube1" id="label2">Format:</label>
+
+    <label for="cube3" id="label3">Style:</label>
+
+</div>
+<div class="scene-container">
+  <div class="scene">
+    <div class="cube" id="cube1" name="cube1"></div>
+  </div>
+  <div class="scene">
+    <div class="cube" id="cube2" name="cube2"></div>
+  </div>
+
+  <div class="scene">
+    <div class="cube" id="cube3" name="cube3"></div>
+  </div>
+</div>
+
+<script>
+  const cubes = document.querySelectorAll('.cube');
+
+  cubes.forEach((cube, index) => {
+    const sidesLists = [
+    ["song", "album", "artist", "movie", "show", "book"],
+    ["poster", "album cover", "record", "mazagine", "movie poster", "advertisment", "concert poster", "basic", "comic book"],
+    ["pop art", "weird", "60s", "70s", "80s", "post punk", "20s"]
+    ];
+
+    sidesCreate(cube);
+
+    for (let i = 1; i <= 6; i++) {
+      const face = cube.querySelector(`.face${i}`);
+      face.innerHTML = sidesLists[index][i - 1];
+    }
+
+    // Initial rotation after a short delay
+    setTimeout(() => {
+      cube.style.transform = `rotateX(${getRandomRotation()}deg) rotateY(${getRandomRotation()}deg) rotateZ(${getRandomRotation()}deg)`;
+      
+      // Additional rotation to make it land on the first side 
+      setTimeout(() => {
+        cube.style.transform = `rotateX(${ Math.random() * (10 - (-10)) + -10}deg) rotateY(${ Math.random() * (10 - (-10)) + -10}deg) rotateZ(${ Math.random() * (10 - (-10)) + -10}deg)`;
+      },  3000); // Adjust the delay as needed
+    }, 1);
+  });
+
+  function sidesCreate(cube) {
+    for (var i = 0; i < 6; i++) {
+      let side = document.createElement("div");
+      side.classList.add("face", `face${i + 1}`);
+      cube.appendChild(side);
+    }
+  }
+
+  function getRandomRotation() {
+    return Math.floor(Math.random() * 360);
+  }
+</script>
+
+</body>
+</html>
