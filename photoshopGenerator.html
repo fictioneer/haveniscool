@@ -52,7 +52,7 @@
     .face4 { transform: rotateY(-90deg) translateZ(60px); }
     .face5 { transform: rotateX(-90deg) translateZ(60px); }
     .face6 { transform: rotateX(180deg) translateZ(60px); }
-    button {margin-top: 20px;}
+    button {margin-top: 20}
 </style>
 </head>
 <body onClick="generate()">
@@ -80,15 +80,33 @@
   </div>
   <button onClick="generate()">generate</button>
 <script>
+    function shuffle(array) {
+  let currentIndex = array.length,  randomIndex;
+
+  // While there remain elements to shuffle.
+  while (currentIndex > 0) {
+
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
+}
     generate()
+    
     function generate() {
   const cubes = document.querySelectorAll('.cube');
 
   cubes.forEach((cube, index) => {
     const sidesLists = [
-    ["song", "album", "artist", "movie", "show", "book"],
-    ["poster", "album cover", "record", "mazagine", "movie poster", "advertisment", "concert poster", "basic", "comic book"],
-    ["pop art", "weird", "60s", "70s", "80s", "post punk", "20s"]
+    shuffle(["song", "album", "artist", "movie", "show", "book"]),
+    shuffle(["poster", "album cover", "record", "mazagine", "movie poster", "advertisment", "concert poster", "basic", "comic book"]),
+    shuffle(["pop art", "weird", "60s", "70s", "80s", "post punk", "20s"])
     ];
 
     sidesCreate(cube);
@@ -125,4 +143,5 @@
 
 </body>
 </html>
+
 
