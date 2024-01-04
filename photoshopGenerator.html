@@ -5,45 +5,60 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Landing on One Side</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik+Broken+Fax">
-  <style>
-    .scene-container {
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Allan&family=DotGothic16&family=Lobster&family=Long+Cang&family=Mate+SC&family=Orbitron&family=Roboto:wght@100&family=Seymour+One&display=swap" rel="stylesheet">   <style>
+    body {
+        background-image: url("https://www.adobeinspirationgenerator.com/images/adobestock_sky.jpeg")
+    }
+    @keyframes floatAnimation {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-40px);
+      }
+    }
+   
+    
+     .scene-container {
+    
       display: flex;
       justify-content: space-around;
-      margin-top: 20px;
+      margin-top: 60px;
+      animation: floatAnimation 3s infinite ease-in-out;
     }
-.labels {
-    display: flex;
-      justify-content: space-around;
-      font-weight: 700;
-       font-size: 20px;
-}
-    .scene {
-      perspective: 400px; /* Adjusted perspective */
-      width: 120px; /* Smaller width */  
-      height: 120px; /* Smaller height */
-      margin: 20px; /* Smaller margin */
+
+    .scene { 
+      perspective: 400px; 
+      width: 120px;   
+      height: 120px; 
+      margin: 20px; 
     }
 
     .cube {
       width: 100%;
       height: 100%;
       transform-style: preserve-3d;
-      transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+      transform: rotateX(-90deg) rotateY(180deg) rotateZ(180deg);
       transition: transform 3s ease-in-out;
+      
     }
 
     .face {
+        
       position: absolute;
-      width: 120px; /* Smaller width */
-      height: 120px; /* Smaller height */
+      width: 120px; 
+      height: 120px; 
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 12px; /* Smaller font size */
+      font-size: 13px; 
       font-weight: bold;
+      text-align: center;
       background-color: #3498db;
       border: 2px solid #2980b9;
-      backface-visibility: hidden; /* Ensure text is visible on all faces */
+      backface-visibility: hidden; 
     }
 
     .face1 { transform: rotateY(0deg) translateZ(60px); }
@@ -52,16 +67,44 @@
     .face4 { transform: rotateY(-90deg) translateZ(60px); }
     .face5 { transform: rotateX(-90deg) translateZ(60px); }
     .face6 { transform: rotateX(180deg) translateZ(60px); }
-    button {margin-top: 20}
+    button {margin-top: 20px}
+    #GenerateButton {
+        text-align: center;
+        color: white;
+        width: 120px;
+        height: 50px;
+        background-color: rgb(0, 149, 208);
+        border-radius: 40px;
+        border: 3px solid white;
+        box-shadow: 3px 5px 10px 1px rgba(0, 0, 0, 0.466);
+        font-family: 'Lobster', sans-serif;
+        transition: transform 0.2s ease-in-out;
+        cursor: pointer;
+    }
+
+    #GenerateButton:hover {
+      transform: scale(1.1); /* Increase the size by 10% */
+    }
+
+    #buttons {
+        margin-top: 90px;
+        text-align: center;
+
+    }
+    #top {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 30px;
+        font-weight: 1000;
+        color: white;
+
+    }
 </style>
 </head>
+
 <body onClick="generate()">
-<div class="labels">
-    <label for="cube1" id="label1">Media:</label>
-    <label for="cube1" id="label2">Format:</label>
-
-    <label for="cube3" id="label3">Style:</label>
-
+    <div id="top">
+    <span id="title">Photoshop Idea Generator</span>
 </div>
 <div class="scene-container">
   <div class="scene">
@@ -78,70 +121,117 @@
 <div id="viewport" >
     <div id="world" ></div>
   </div>
-  <button onClick="generate()">generate</button>
+  <div id="buttons">
+  <button id="GenerateButton" onClick="generate()">generate</button>
+</div>
 <script>
+
     function shuffle(array) {
+
   let currentIndex = array.length,  randomIndex;
 
-  // While there remain elements to shuffle.
   while (currentIndex > 0) {
 
-    // Pick a remaining element.
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex--;
 
-    // And swap it with the current element.
     [array[currentIndex], array[randomIndex]] = [
       array[randomIndex], array[currentIndex]];
   }
 
   return array;
 }
-    generate()
-    
-    function generate() {
-  const cubes = document.querySelectorAll('.cube');
 
-  cubes.forEach((cube, index) => {
-    const sidesLists = [
-    shuffle(["song", "album", "artist", "movie", "show", "book"]),
-    shuffle(["poster", "album cover", "record", "mazagine", "movie poster", "advertisment", "concert poster", "basic", "comic book"]),
-    shuffle(["pop art", "weird", "60s", "70s", "80s", "post punk", "20s"])
-    ];
+function generate() {
+    // Disable the button before starting the generation process
+    document.getElementById("GenerateButton").disabled = true;
 
-    sidesCreate(cube);
+    const cubes = document.querySelectorAll('.cube');
+    cubes.forEach((cube, index) => {
+        cube.innerHTML = "";
+    });
 
-    for (let i = 1; i <= 6; i++) {
-      const face = cube.querySelector(`.face${i}`);
-      face.innerHTML = sidesLists[index][i - 1];
-    }
+    let generatedCount = 0; // Counter to keep track of completed generation
 
-    // Initial rotation after a short delay
-    setTimeout(() => {
-      cube.style.transform = `rotateX(${getRandomRotation()}deg) rotateY(${getRandomRotation()}deg) rotateZ(${getRandomRotation()}deg)`;
-      
-      // Additional rotation to make it land on the first side 
-      setTimeout(() => {
-        cube.style.transform = `rotateX(${ Math.random() * (10 - (-10)) + -10}deg) rotateY(${ Math.random() * (10 - (-10)) + -10}deg) rotateZ(${ Math.random() * (10 - (-10)) + -10}deg)`;
-      },  3000); // Adjust the delay as needed
-    }, 1);
-  });
+    cubes.forEach((cube, index) => {
+        const sidesLists = [
+            shuffle(["song", "album", "artist", "movie", "show", "book"]),
+            shuffle(["poster", "album cover", "record", "mazagine", "movie poster", "ad", "concert poster", "basic", "comic book"]),
+            shuffle(["pop art", "weird", "60s", "70s", "80s", "post punk", "20s"])
+        ];
+
+        sidesCreate(cube);
+
+        for (let i = 1; i <= 6; i++) {
+            const face = cube.querySelector(`.face${i}`);
+            face.innerHTML = sidesLists[index][i - 1];
+        }
+
+        setTimeout(() => {
+            cube.style.transform = `rotateX(${getRandomRotation()}deg) rotateY(${getRandomRotation()}deg) rotateZ(${getRandomRotation()}deg)`;
+
+            setTimeout(() => {
+                cube.style.transform = `rotateX(${Math.random() * (20 - (-20)) + -20}deg) rotateY(${Math.random() * (20 - (-20)) + -20}deg) rotateZ(${Math.random() * (10 - (-10)) + -10}deg)`;
+
+                // Increment the generatedCount after each completed generation
+                generatedCount++;
+
+                // Check if all cubes have been generated
+                if (generatedCount === cubes.length) {
+                    // Enable the button after all asynchronous operations are complete
+                    document.getElementById("GenerateButton").disabled = false;
+                }
+            }, 3000);
+        }, 1);
+    });
+}
 
   function sidesCreate(cube) {
+    let fonts = shuffle(["'DotGothic16', sans-serif", "'Lobster', sans-serif", "'Long Cang', cursive", "'Mate SC', serif", "'Orbitron', sans-serif", "'Roboto', sans-serif", "'Seymour One', sans-serif", "'Seymour One', sans-serif"])
+    const colors = shuffle([
+  ["#FFD1DC", "#F08080"], 
+  ["#FFECB3", "#FF8C00"], 
+  ["#FFD700", "#7FFFD4"], 
+  ["#98FB98", "#9370DB"], 
+  ["#ADD8E6", "#FFA07A"], 
+  ["#87CEFA", "#FF69B4"], 
+  ["#FFB6C1", "#87CEEB"], 
+  ["#C1FFC1", "#FF4500"], 
+  ["#FFECB3", "#8A2BE2"], 
+  ["#F0E68C", "#BA55D3"], 
+  ["#FFE4C4", "#483D8B"], 
+  ["#DDA0DD", "#00CED1"], 
+  ["#FFF0F5", "#48D1CC"], 
+  ["#FFFAF0", "#8B4513"], 
+  ["#F5FFFA", "#4B0082"], 
+  ["#F5F5DC", "#556B2F"], 
+  ["#FFE4E1", "#20B2AA"], 
+  ["#E6E6FA", "#FF6347"], 
+  ["#FAFAD2", "#800000"], 
+  ["#B0E0E6", "#CD853F"],  
+]);
     for (var i = 0; i < 6; i++) {
       let side = document.createElement("div");
       side.classList.add("face", `face${i + 1}`);
+        side.style.fontFamily = fonts[i]
+        side.style.backgroundColor = colors[i][1]
+        side.style.color = colors[i][0]
+
       cube.appendChild(side);
     }
   }
-}
+
+
 
   function getRandomRotation() {
     return Math.floor(Math.random() * 360);
   }
+  generate()
+
 </script>
 
 </body>
 </html>
+
 
 
