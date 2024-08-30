@@ -20,7 +20,7 @@
 }
 
 .u-section-1 .u-image-1 {
-  background-image: url("images/TaylorsVersion.png");
+  background-image: url("assets/thumbs/TaylorsVersion.png");
   box-shadow: 5px 5px 20px 0 rgba(0,0,0,0.4);
   --radius: 21px;
 }
@@ -30,7 +30,7 @@
 }
 
 .u-section-1 .u-image-2 {
-  background-image: url("images/PhotoshopGeneratorthumb.png");
+  background-image: url("assets/thumbs/PhotoshopGenerator.png");
   box-shadow: 5px 5px 20px 0 rgba(0,0,0,0.4);
   --radius: 21px;
 }
