@@ -1,4 +1,7 @@
-        body {
+#logo {
+    position: fixed;
+}
+body {
 background-size: 100% 100%;
 background-position: 0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px;
 background-image: radial-gradient(70% 70% at -8% 52%, #96E6FFBF 7%, #073AFF00 100%),radial-gradient(50% 50% at 18% 71%, #FFE3AC7A 6%, #073AFF00 100%),radial-gradient(70% 53% at 36% 76%, #DC9FFFFF 0%, #073AFF00 100%),radial-gradient(42% 53% at 15% 94%, #FF9993FF 7%, #073AFF00 100%),radial-gradient(42% 53% at 34% 72%, #A0D4FFFF 7%, #073AFF00 100%),radial-gradient(18% 28% at 35% 87%, #909090FF 7%, #073AFF00 100%),radial-gradient(31% 43% at 7% 98%, #F1C0DB 24%, #073AFF00 100%),radial-gradient(35% 56% at 91% 74%, #FC977BFF 9%, #073AFF00 100%),radial-gradient(74% 86% at 67% 38%, #5F89FFFF 24%, #073AFF00 100%),linear-gradient(125deg, #efece8 1%, #C7C7C7FF 100%);            font-family: Arial, sans-serif;
