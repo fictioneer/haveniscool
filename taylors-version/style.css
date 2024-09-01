@@ -21,7 +21,10 @@ background-image: radial-gradient(70% 70% at -8% 52%, #96E6FFBF 7%, #073AFF00 10
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
+#title {
+              text-align: center;
 
+}
         h3 {
             color: #333;
         }
